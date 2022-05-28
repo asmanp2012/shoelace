@@ -33,6 +33,7 @@
   "scripts": {
     "start": "node scripts/build.js --bundle --serve",
     "build": "node scripts/build.js --bundle --types --copydir \"docs/dist\"",
+    "build:ts": "tsc --build --pretty",
     "verify": "npm run prettier:check && npm run lint && npm run build && npm run test",
     "prepublishOnly": "npm run verify",
     "prettier": "prettier --write --loglevel warn .",
@@ -41,6 +42,7 @@
     "lint:fix": "eslint src --max-warnings 0 --fix",
     "ts-check": "tsc --noEmit --project ./tsconfig.json",
     "create": "plop --plopfile scripts/plop/plopfile.js",
+    "serve:dev": "web-dev-server --config dev-server.mjs",
     "test": "web-test-runner",
     "test:component": "npm run test -- --group",
     "test:watch": "web-test-runner --watch",

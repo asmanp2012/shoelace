@@ -10,7 +10,8 @@
       "es2020"
     ],
     "declaration": true,
-    "rootDir": ".",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "strict": true,
     "strictPropertyInitialization": false,
     "strictFunctionTypes": false,
@@ -28,7 +29,4 @@
     "useUnknownInCatchVariables": true,
     "baseUrl": "."
   },
-  "include": [
-    "src"
-  ]
 }

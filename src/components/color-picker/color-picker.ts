@@ -1,4 +1,4 @@
-import Color from 'color';
+import * as Color from 'color';
 import { html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -24,7 +24,7 @@ import type SlInput from '../../components/input/input';
 const hasEyeDropper = 'EyeDropper' in window;
 
 interface EyeDropperConstructor {
-  new (): EyeDropperInterface;
+  new(): EyeDropperInterface;
 }
 
 interface EyeDropperInterface {
@@ -481,7 +481,7 @@ export default class SlColorPicker extends LitElement {
     colorString = this.normalizeColorString(colorString);
 
     try {
-      parsed = Color(colorString);
+      parsed = Color.default(colorString);
     } catch {
       return null;
     }
@@ -659,21 +659,21 @@ export default class SlColorPicker extends LitElement {
       <div
         part="base"
         class=${classMap({
-          'color-picker': true,
-          'color-picker--inline': this.inline,
-          'color-picker--disabled': this.disabled
-        })}
+      'color-picker': true,
+      'color-picker--inline': this.inline,
+      'color-picker--disabled': this.disabled
+    })}
         aria-disabled=${this.disabled ? 'true' : 'false'}
         aria-labelledby="label"
         tabindex=${this.inline ? '0' : '-1'}
       >
         ${this.inline
-          ? html`
+        ? html`
               <sl-visually-hidden id="label">
                 <slot name="label">${this.label}</slot>
               </sl-visually-hidden>
             `
-          : null}
+        : null}
 
         <div
           part="grid"
@@ -685,14 +685,14 @@ export default class SlColorPicker extends LitElement {
           <span
             part="grid-handle"
             class=${classMap({
-              'color-picker__grid-handle': true,
-              'color-picker__grid-handle--dragging': this.isDraggingGridHandle
-            })}
+          'color-picker__grid-handle': true,
+          'color-picker__grid-handle--dragging': this.isDraggingGridHandle
+        })}
             style=${styleMap({
-              top: `${gridHandleY}%`,
-              left: `${gridHandleX}%`,
-              backgroundColor: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%)`
-            })}
+          top: `${gridHandleY}%`,
+          left: `${gridHandleX}%`,
+          backgroundColor: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%)`
+        })}
             role="application"
             aria-label="HSL"
             tabindex=${ifDefined(this.disabled ? undefined : '0')}
@@ -712,8 +712,8 @@ export default class SlColorPicker extends LitElement {
                 part="slider-handle"
                 class="color-picker__slider-handle"
                 style=${styleMap({
-                  left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`
-                })}
+          left: `${this.hue === 0 ? 0 : 100 / (360 / this.hue)}%`
+        })}
                 role="slider"
                 aria-label="hue"
                 aria-orientation="horizontal"
@@ -726,7 +726,7 @@ export default class SlColorPicker extends LitElement {
             </div>
 
             ${this.opacity
-              ? html`
+        ? html`
                   <div
                     part="slider opacity-slider"
                     class="color-picker__alpha color-picker__slider color-picker__transparent-bg"
@@ -736,19 +736,19 @@ export default class SlColorPicker extends LitElement {
                     <div
                       class="color-picker__alpha-gradient"
                       style=${styleMap({
-                        backgroundImage: `linear-gradient(
+          backgroundImage: `linear-gradient(
                           to right,
                           hsl(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, 0%) 0%,
                           hsl(${this.hue}deg, ${this.saturation}%, ${this.lightness}%) 100%
                         )`
-                      })}
+        })}
                     ></div>
                     <span
                       part="slider-handle"
                       class="color-picker__slider-handle"
                       style=${styleMap({
-                        left: `${this.alpha}%`
-                      })}
+          left: `${this.alpha}%`
+        })}
                       role="slider"
                       aria-label="alpha"
                       aria-orientation="horizontal"
@@ -760,7 +760,7 @@ export default class SlColorPicker extends LitElement {
                     ></span>
                   </div>
                 `
-              : ''}
+        : ''}
           </div>
 
           <button
@@ -769,8 +769,8 @@ export default class SlColorPicker extends LitElement {
             class="color-picker__preview color-picker__transparent-bg"
             aria-label=${this.localize.term('copy')}
             style=${styleMap({
-              '--preview-color': `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
-            })}
+          '--preview-color': `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
+        })}
             @click=${this.handleCopy}
           ></button>
         </div>
@@ -793,7 +793,7 @@ export default class SlColorPicker extends LitElement {
 
           <sl-button-group>
             ${!this.noFormatToggle
-              ? html`
+        ? html`
                   <sl-button
                     part="format-button"
                     aria-label=${this.localize.term('toggleColorFormat')}
@@ -809,9 +809,9 @@ export default class SlColorPicker extends LitElement {
                     ${this.setLetterCase(this.format)}
                   </sl-button>
                 `
-              : ''}
+        : ''}
             ${hasEyeDropper
-              ? html`
+        ? html`
                   <sl-button
                     part="eye-dropper-button"
                     exportparts="
@@ -830,15 +830,15 @@ export default class SlColorPicker extends LitElement {
                     ></sl-icon>
                   </sl-button>
                 `
-              : ''}
+        : ''}
           </sl-button-group>
         </div>
 
         ${this.swatches.length > 0
-          ? html`
+        ? html`
               <div part="swatches" class="color-picker__swatches">
                 ${this.swatches.map(swatch => {
-                  return html`
+          return html`
                     <div
                       part="swatch"
                       class="color-picker__swatch color-picker__transparent-bg"
@@ -847,15 +847,15 @@ export default class SlColorPicker extends LitElement {
                       aria-label=${swatch}
                       @click=${() => !this.disabled && this.setColor(swatch)}
                       @keydown=${(event: KeyboardEvent) =>
-                        !this.disabled && event.key === 'Enter' && this.setColor(swatch)}
+              !this.disabled && event.key === 'Enter' && this.setColor(swatch)}
                     >
                       <div class="color-picker__swatch-color" style=${styleMap({ backgroundColor: swatch })}></div>
                     </div>
                   `;
-                })}
+        })}
               </div>
             `
-          : ''}
+        : ''}
       </div>
     `;
 
@@ -878,16 +878,16 @@ export default class SlColorPicker extends LitElement {
           part="trigger"
           slot="trigger"
           class=${classMap({
-            'color-dropdown__trigger': true,
-            'color-dropdown__trigger--disabled': this.disabled,
-            'color-dropdown__trigger--small': this.size === 'small',
-            'color-dropdown__trigger--medium': this.size === 'medium',
-            'color-dropdown__trigger--large': this.size === 'large',
-            'color-picker__transparent-bg': true
-          })}
+      'color-dropdown__trigger': true,
+      'color-dropdown__trigger--disabled': this.disabled,
+      'color-dropdown__trigger--small': this.size === 'small',
+      'color-dropdown__trigger--medium': this.size === 'medium',
+      'color-dropdown__trigger--large': this.size === 'large',
+      'color-picker__transparent-bg': true
+    })}
           style=${styleMap({
-            color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
-          })}
+      color: `hsla(${this.hue}deg, ${this.saturation}%, ${this.lightness}%, ${this.alpha / 100})`
+    })}
           type="button"
         >
           <sl-visually-hidden>

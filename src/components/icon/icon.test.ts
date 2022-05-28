@@ -1,5 +1,5 @@
 import { elementUpdated, expect, fixture, html, oneEvent } from '@open-wc/testing';
-import { registerIconLibrary } from '../../../dist/shoelace.js';
+import { registerIconLibrary } from '../../shoelace.js';
 import type SlIcon from './icon';
 
 const testLibraryIcons = {
